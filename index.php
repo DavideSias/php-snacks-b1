@@ -46,29 +46,34 @@ $arrBasket = [
 
 //Snack 2
 
-// if(isset($_GET['mail'], $_GET['name'], $_GET['age'] )){
-//     $mail = $_GET['mail'];
-//     $name = $_GET['name'];
-//     $age = $_GET['age'];
+if(isset($_GET['mail'], $_GET['name'], $_GET['age'] )){
+    $mail = $_GET['mail'];
+    $name = $_GET['name'];
+    $age = $_GET['age'];
 
-//     if((strpos($mail, '@') !== FALSE) && (strpos($mail, '.' !== FALSE))){
+    $pos_at = strpos($mail, '@');
 
-//         if(strlen($name) < 2) {
-//             $message = 'Il nome deve essere più lungo di 3 caratteri';
-//         } else {
-//             $message = 'Accesso Eseguito';
-//         };
+    if($pos_at && strpos($mail, '.', $pos_at)){
+        if(strlen($name) <= 2) {
+            $message = 'Il nome deve essere più lungo di 3 caratteri';
+        } else {
+            if(is_numeric($age)){
+                $message = 'Accesso eseguito';
+            } else {
+                $message = "L'età deve essere un numero";
+            }
+        };
+    } else {
+        $message = "La mail deve contenere '@' e '.'";
+    };
 
-//     } else {
-//         $message = "La mail deve contenere '@' e '.'";
-//     };
+} else {
+    $mail = '';
+    $name = '';
+    $age = '';
+    $message = 'Inserire tutti i dati richiesti';
+}
 
-// } else {
-//     $mail = '';
-//     $name = '';
-//     $message = 'Inserire tutti i dati richiesti';
-// }
-   
 //Snack 4
 
 $numArray = [];
@@ -105,18 +110,18 @@ while ($i < 15) {
         ?>
     </ul>
 
-    <!-- <h1>Snack 2</h1>
+    <h1>Snack 2</h1>
     <form action="" method="get">
         <label for="mail">Mail: </label>
         <input type="text" name="mail" id="mail">
         <label for="name">Nome: </label>
         <input type="text" name="name" id="name">
         <label for="age">Età: </label>
-        <input type="number" name="age" id="age">
+        <input type="text" name="age" id="age">
         <button>Check info</button>
     </form>
 
-    <h2><?= $message ?></h2> -->
+    <h2><?= $message ?></h2>
 
     <h1>Snack 4</h1>
 
